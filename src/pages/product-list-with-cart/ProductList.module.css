@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "RedHat-Regular";
+  src: url(../../assets/fonts/RedHatText-VariableFont_wght.ttf)
+    format("truetype");
+}
+.container {
+  width: 100%;
+  max-width: 800px;
+  font-family: "RedHat-Regular";
+}
