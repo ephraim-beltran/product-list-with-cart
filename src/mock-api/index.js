@@ -1,7 +1,11 @@
 import data from "../data/data.json";
 
-export const fetchSimulated = (url, object) => {
+export const fetchSimulated = () => {
   return Promise.resolve({
-    json: () => Promise.resolve(data),
+    ok: true,
+    json: () =>
+      Promise.resolve(
+        data.map((item, index) => ({ ...item, id: index + 100 })),
+      ),
   });
 };
