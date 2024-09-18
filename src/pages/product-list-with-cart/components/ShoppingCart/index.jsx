@@ -9,23 +9,25 @@ export function ShoppingCart() {
   return (
     <section className={styled.shoppingCart}>
       <h2>Your Cart ({shoppingCart.length})</h2>
-      <ul>
-        {shoppingCart.length === 0 ? (
-          <li className={styled.emptyContent}>
-            <img src={emptyCart} className={styled.emptyCartImage} />
-            <p>Your added items will appear here</p>
-          </li>
-        ) : (
-          <CartList list={shoppingCart} removeFromList={removeThis} />
-        )}
-      </ul>
-      <aside className={styled.aside}>
-        <i role="presentation"></i>
-        <p>
-          This is a <strong>carbon-neutral</strong> delivery
-        </p>
-      </aside>
-      <button className={styled.submit}>Confirm Order</button>
+      {shoppingCart.length === 0 ? (
+        <div className={styled.emptyContent}>
+          <img src={emptyCart} className={styled.emptyCartImage} />
+          <p>Your added items will appear here</p>
+        </div>
+      ) : (
+        <>
+          <ul>
+            <CartList list={shoppingCart} removeFromList={removeThis} />
+          </ul>
+          <aside className={styled.aside}>
+            <i role="presentation"></i>
+            <p>
+              This is a <strong>carbon-neutral</strong> delivery
+            </p>
+          </aside>
+          <button className={styled.submit}>Confirm Order</button>
+        </>
+      )}
     </section>
   );
 }
