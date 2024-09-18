@@ -1,0 +1,76 @@
+.shoppingCart {
+  flex-grow: 1;
+  max-width: 385px;
+  color: var(--rose-500);
+  background-color: var(--rose-50);
+  height: fit-content;
+  padding: 25px;
+  border-radius: 12px;
+}
+.emptyCartImage {
+  /*width: 100%;*/
+}
+.emptyContent {
+  padding-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shoppingCart h2 {
+  font-weight: 800;
+  color: var(--red);
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.shoppingCart ul {
+  padding: 0;
+  margin: 0;
+}
+
+.shoppingCart p {
+  letter-spacing: -0.06em;
+  font-weight: 500;
+}
+
+.aside {
+  color: var(--rose-900);
+  display: flex;
+  column-gap: 0.4em;
+  justify-content: center;
+  background-color: var(--rose-100);
+  color: var(--rose-500);
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+}
+
+.aside strong {
+  color: var(--rose-900);
+  font-weight: 600;
+}
+
+.aside i {
+  content: url(../../../../assets/images/icon-carbon-neutral.svg);
+}
+
+.aside p {
+  font-size: 0.95em;
+}
+
+.submit {
+  width: 100%;
+  border: none;
+  background-color: var(--red);
+  color: var(--rose-50);
+  font-size: 0.9em;
+  letter-spacing: -0.008em;
+  font-weight: 600;
+  padding-block: 1.2em;
+  border-radius: 25px;
+}
+
+.submit:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+}
