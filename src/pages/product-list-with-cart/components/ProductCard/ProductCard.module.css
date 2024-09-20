@@ -1,0 +1,93 @@
+.product-card {
+  width: 100%;
+  max-width: 251px;
+}
+
+.product-card dd {
+  margin-left: 0;
+}
+
+.menuImage {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  border: 1px solid var(--rose-300);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(25%);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 158px;
+  border-radius: 20px;
+  padding-block: 0.75em;
+  background-color: var(--rose-50);
+}
+.menuImage:has(fieldset) .image {
+  outline: 3px inset var(--red);
+}
+
+.addToCart {
+  display: flex;
+  align-content: center;
+  font-weight: 600;
+  font-style: normal;
+  column-gap: 0.5em;
+}
+
+.addToCart::before {
+  content: url(../../../../assets/images/icon-add-to-cart.svg);
+}
+
+.buttonRange {
+  margin: 0;
+  background-color: var(--red);
+  color: var(--rose-50);
+  border: none;
+  justify-content: space-between;
+}
+
+.buttonRange > button {
+  display: grid;
+  place-items: center;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid var(--rose-50);
+}
+
+.decreaseButton {
+  content: url(../../../../assets/images/icon-decrement-quantity.svg);
+}
+
+.increaseButton {
+  content: url(../../../../assets/images/icon-increment-quantity.svg);
+}
+
+.picture {
+  width: 100%;
+}
+
+.image {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.category {
+  margin-top: 1.8em;
+  margin-bottom: 0.3em;
+  font-size: 0.9em;
+  color: var(--rose-500);
+}
+
+.productName {
+  font-weight: 600;
+  margin-bottom: 0.3em;
+}
+
+.price {
+  color: var(--red);
+}

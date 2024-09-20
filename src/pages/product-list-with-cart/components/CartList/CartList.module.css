@@ -1,0 +1,93 @@
+.listItem,
+.cartTotal {
+  list-style-type: none;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.listItem:is(li + li) {
+  border-top: 2px solid var(--rose-100);
+}
+
+.listItem button:has(i) {
+  margin: 0;
+  padding: 0.2em;
+  border-radius: 50%;
+  border: 2px solid var(--rose-300);
+  background: none;
+  aspect-ratio: 1;
+  box-shadow: none;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+.listItem button:has(i):hover {
+  border: 2px solid var(--rose-500);
+}
+.listItem i {
+  content: url(../../../../assets/images/icon-remove-item.svg);
+}
+
+.listInfo {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  /*column-gap: 1em;*/
+  row-gap: 0.5em;
+  font-size: 14px;
+}
+
+.listInfo > :not(h3) {
+  /*line-height: 1.85;*/
+}
+
+.listInfo h3 {
+  flex-basis: 100%;
+  letter-spacing: -0.01em;
+  font-size: 1.01em;
+  font-weight: 500;
+  margin: 0;
+  color: var(--rose-900);
+}
+.quantity {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.quantity::after {
+  content: "x";
+}
+
+.price::before {
+  content: "@";
+  margin-left: 1.2em;
+  margin-right: 0.2em;
+}
+.subtotal {
+  font-weight: 600;
+  margin-left: 0.55em;
+}
+
+.cartTotal {
+  border-top: 2px solid var(--rose-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.cartTotal h3 {
+  font-weight: normal;
+  font-size: 1em;
+  color: var(--rose-900);
+}
+.total {
+  font-weight: 800;
+  font-size: 1.47em;
+  color: var(--rose-900);
+}
