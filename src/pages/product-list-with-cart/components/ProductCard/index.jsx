@@ -5,7 +5,7 @@ import { formatCurrency } from "../../utilities/formatCurrency.js";
 import PropType from "prop-types";
 
 export function ProductCard({ productData }) {
-  const { increaseItem, decreaseItem, getQuantityOf } =
+  const { increaseItem, decreaseItem, removeThis, getQuantityOf } =
     useContext(ShoppingCartContext);
 
   const quantity = getQuantityOf(productData.id);
@@ -16,24 +16,37 @@ export function ProductCard({ productData }) {
   }
   function decreaseProduct(e, product = productData) {
     e.preventDefault();
-    decreaseItem(product);
+    if (quantity == 1) removeThis(product);
+    else decreaseItem(product);
   }
   return (
-    <article className={styled["product-card"]}>
-      <p>Image</p>
-      {quantity === 0 || quantity == null ? (
-        <button onClick={increaseProduct}>Add to Cart</button>
-      ) : (
-        <>
-          <button onClick={decreaseProduct}>-</button>
-          {quantity}
-          <button onClick={increaseProduct}>+</button>
-        </>
-      )}
-      <p>{productData.category}</p>
-      <p>{productData.name}</p>
-      <p>{formatCurrency(productData.price)}</p>
-    </article>
+    <dl className={styled["product-card"]}>
+      <div className={styled.menuImage}>
+        <picture className={styled.picture}>
+          <source srcSet={productData.image.mobile} media="(max-width:600px)" />
+          <source srcSet={productData.image.tablet} media="(max-width:991px)" />
+          <img src={productData.image.desktop} className={styled.image} />
+        </picture>
+        {quantity === 0 || quantity == null ? (
+          <button className={styled.button} onClick={increaseProduct}>
+            <i className={styled.addToCart}>Add to Cart</i>
+          </button>
+        ) : (
+          <fieldset className={`${styled.button} ${styled.buttonRange}`}>
+            <button onClick={decreaseProduct}>
+              <i className={styled.decreaseButton}>-</i>
+            </button>
+            {quantity}
+            <button onClick={increaseProduct}>
+              <i className={styled.increaseButton}>+</i>
+            </button>
+          </fieldset>
+        )}
+      </div>
+      <dd className={styled.category}>{productData.category}</dd>
+      <dt className={styled.productName}>{productData.name}</dt>
+      <dd className={styled.price}>{formatCurrency(productData.price)}</dd>
+    </dl>
   );
 }
 
