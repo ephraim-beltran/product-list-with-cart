@@ -1,12 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import emptyCart from "../../../../assets/images/illustration-empty-cart.svg";
 import { CartList } from "../CartList";
 import styled from "./ShoppingCart.module.css";
 import PropType from "prop-types";
-import { selectCartItems } from "../CartList/cartSlice";
+import { postOrder, selectCartItems } from "../CartList/cartSlice";
 
 export function ShoppingCart() {
+  const dispatch = useDispatch();
   const shoppingCart = useSelector(selectCartItems);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postOrder(shoppingCart));
+  };
   return (
     <section className={styled.shoppingCart}>
       <h2>Your Cart ({shoppingCart.length})</h2>
@@ -26,7 +31,9 @@ export function ShoppingCart() {
               This is a <strong>carbon-neutral</strong> delivery
             </p>
           </aside>
-          <button className={styled.submit}>Confirm Order</button>
+          <button className={styled.submit} onClick={handleSubmit}>
+            Confirm Order
+          </button>
         </>
       )}
     </section>
