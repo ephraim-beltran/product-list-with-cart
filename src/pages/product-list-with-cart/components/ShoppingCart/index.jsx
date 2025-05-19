@@ -1,11 +1,12 @@
+import { useSelector } from "react-redux";
 import emptyCart from "../../../../assets/images/illustration-empty-cart.svg";
-import { useContext } from "react";
-import { ShoppingCartContext } from "../../context";
 import { CartList } from "../CartList";
 import styled from "./ShoppingCart.module.css";
 import PropType from "prop-types";
+import { selectCartItems } from "../CartList/cartSlice";
+
 export function ShoppingCart() {
-  const { shoppingCart, removeThis } = useContext(ShoppingCartContext);
+  const shoppingCart = useSelector(selectCartItems);
   return (
     <section className={styled.shoppingCart}>
       <h2>Your Cart ({shoppingCart.length})</h2>
@@ -17,7 +18,7 @@ export function ShoppingCart() {
       ) : (
         <>
           <ul>
-            <CartList list={shoppingCart} removeFromList={removeThis} />
+            <CartList list={shoppingCart} />
           </ul>
           <aside className={styled.aside}>
             <i role="presentation"></i>

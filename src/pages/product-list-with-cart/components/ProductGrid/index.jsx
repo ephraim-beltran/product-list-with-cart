@@ -1,22 +1,32 @@
+import { useDispatch, useSelector } from "react-redux";
 import { ProductCard } from "../ProductCard";
 import styled from "./ProductGrid.module.css";
-import { useMarketApi } from "../../hooks/useMarketApi.jsx";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
+import {
+  productListHasError,
+  productListIsLoading,
+  selectProductList,
+  loadList,
+} from "./productListSlice";
 
 export function ProductGrid() {
-  const { marketItems, status } = useMarketApi();
+  const marketItems = useSelector(selectProductList);
+  const isLoading = useSelector(productListIsLoading);
+  const hasError = useSelector(productListHasError);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadList());
+  }, []);
+
   const list = marketItems.map((product) => {
     return <ProductCard key={product.id} productData={product} />;
   });
   return (
     <div className={styled.container}>
-      {status === "loading" ? (
-        <p>Loading...</p>
-      ) : status === "success" ? (
-        list
-      ) : (
-        status === "error" && <p>There was an error loading the market data.</p>
-      )}
+      {isLoading ? <p>Loading...</p> : list}
+      {hasError && <p>There was an error.</p>}
     </div>
   );
 }
