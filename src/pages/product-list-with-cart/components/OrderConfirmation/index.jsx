@@ -4,6 +4,7 @@ import { formatCurrency } from "../../utilities/formatCurrency";
 import { useDispatch, useSelector } from "react-redux";
 import { orderStatus } from "../CartList/cartSlice";
 import { reset } from "../CartList/cartSlice";
+import { Loader } from "../../../../components/Loader";
 
 export function OrderConfirmation({ toggleModal }) {
   const status = useSelector(orderStatus);
@@ -24,7 +25,7 @@ export function OrderConfirmation({ toggleModal }) {
   return (
     <div className={styled.dialogue}>
       <section className={styled.content}>
-        {status.pending && <p>Your order is pending...</p>}
+        {status.pending && <Loader />}
         {status.rejected && (
           <>
             <p>Your order was not sent. There was an error.</p>

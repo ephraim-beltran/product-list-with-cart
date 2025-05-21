@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchList } from "../../../../api/getList.js";
 
-const getList = createAsyncThunk("getList", async (args) => {
+const getList = createAsyncThunk("getList", async () => {
   const data = await fetchList();
   return data;
 });
@@ -12,19 +12,6 @@ const productListSlice = createSlice({
     isLoading: false,
     hasError: false,
   },
-  // extraReducers: {
-  //   [getList.fulfilled]: (state, action) => {
-  //     state.isLoading = false;
-  //     state.productList = action.payload;
-  //   },
-  //   [getList.pending]: (state) => {
-  //     state.isLoading = true;
-  //   },
-  //   [getList.rejected]: (state) => {
-  //     state.isLoading = false;
-  //     state.hasError = true;
-  //   },
-  // },
   extraReducers: (builder) => {
     builder
       .addCase(getList.fulfilled, (state, action) => {
