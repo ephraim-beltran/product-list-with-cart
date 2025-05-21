@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-export async function sendOrder(order, id) {
+export async function sendOrder({ orderList, total }, id) {
   const url = "https://api.restful-api.dev/objects";
   const orderId = uuidv4();
 
@@ -11,21 +11,25 @@ export async function sendOrder(order, id) {
     data: {
       orderId,
       customerId,
-      order,
+      order: {
+        orderList,
+        total,
+      },
     },
   };
-  const headers = {
+  const options = {
     method: "POST",
-    "Content-Type": "application/json",
+    headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
   };
-
-  try {
-    const res = await fetch(url, headers);
-    if (!res.ok) throw new Error("[API][ERROR]: The order was not sent.");
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    const error = "[API][ERROR]: There was an error in sending the order.";
+    console.error(error);
+    throw new Error(error);
+  } else {
+    console.log("[API][SUCCESS]: The order was successfully sent.");
     const data = await res.json();
     return data;
-  } catch (error) {
-    console.error(error);
   }
 }

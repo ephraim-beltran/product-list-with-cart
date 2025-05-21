@@ -3,15 +3,21 @@ import emptyCart from "../../../../assets/images/illustration-empty-cart.svg";
 import { CartList } from "../CartList";
 import styled from "./ShoppingCart.module.css";
 import PropType from "prop-types";
-import { postOrder, selectCartItems } from "../CartList/cartSlice";
+import { postOrder, selectCartItems, selectTotal } from "../CartList/cartSlice";
+import { useModal } from "../../hooks/useModal";
 
-export function ShoppingCart() {
+export function ShoppingCart({ toggleModal }) {
   const dispatch = useDispatch();
   const shoppingCart = useSelector(selectCartItems);
+  const total = useSelector(selectTotal);
+
+  const order = { orderList: shoppingCart, total };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postOrder(shoppingCart));
+    dispatch(postOrder(order));
+    toggleModal();
   };
+
   return (
     <section className={styled.shoppingCart}>
       <h2>Your Cart ({shoppingCart.length})</h2>

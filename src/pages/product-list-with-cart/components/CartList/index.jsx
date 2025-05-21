@@ -15,6 +15,7 @@ export function CartList({ list }) {
     dispatch(getTotal());
   });
   const total = useSelector(selectTotal);
+  const order = { list, total };
   const cart = list.map((item) => {
     const subTotal = item.price * item.quantity;
     return (

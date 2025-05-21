@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { sendOrder } from "../../../../api/sendOrder";
 
-export const postOrder = createAsyncThunk("postOrder", async (order, id) => {
-  const serverResponse = await sendOrder(order, id);
+export const postOrder = createAsyncThunk("postOrder", async (order) => {
+  const serverResponse = await sendOrder(order);
+  console.info(serverResponse);
   return serverResponse;
 });
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -37,6 +39,14 @@ const cartSlice = createSlice({
       const subtotal = state.cart.map((item) => item.quantity * item.price);
       state.total = subtotal.reduce((a, b) => a + b);
     },
+    reset: (state) => {
+      state.cart = [];
+      state.total = 0;
+      state.orderSent = false;
+      state.orderPending = false;
+      state.orderRejected = false;
+      state.orderInfo = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -63,13 +73,14 @@ export const {
   decreaseItemAmount,
   removeItem,
   getTotal,
+  reset,
 } = cartSlice.actions;
 export const selectCartItems = (state) => state.cart.cart;
 export const selectTotal = (state) => state.cart.total;
-export const {
-  orderPending,
-  orderRejected,
-  orderSent,
-  orderInfo,
-} = (state) => state.cart;
+export const orderStatus = (state) => ({
+  sent: state.cart.orderSent,
+  pending: state.cart.orderPending,
+  rejected: state.cart.orderRejected,
+  info: state.cart.orderInfo,
+});
 export default cartSlice.reducer;
