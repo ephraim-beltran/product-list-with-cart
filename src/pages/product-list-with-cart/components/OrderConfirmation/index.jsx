@@ -21,7 +21,6 @@ export function OrderConfirmation({ toggleModal }) {
       <div>Start New Order</div>
     </a>
   );
-
   return (
     <div className={styled.dialogue}>
       <section className={styled.content}>
@@ -42,9 +41,12 @@ export function OrderConfirmation({ toggleModal }) {
             <ul>
               {order.data.order.orderList.map((item, index) => {
                 const subTotal = item.price * item.quantity;
+                const assetUrl =
+                  "https://data-placeholder.netlify.app/data/product-list-with-cart/";
+                const thumbnail = `${assetUrl}${item.image.thumbnail}`;
                 return (
                   <li key={index} className={styled.listItem}>
-                    <img src={item.image.thumbnail} alt={item.name} />
+                    <img src={thumbnail} alt={item.name} />
                     <div className={styled.listInfo}>
                       <h3 className={styled.itemName}>{item.name}</h3>
                       <span className={styled.quantity}>{item.quantity}x</span>
