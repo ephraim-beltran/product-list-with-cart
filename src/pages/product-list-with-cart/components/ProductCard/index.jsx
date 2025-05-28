@@ -30,13 +30,18 @@ export function ProductCard({ productData }) {
     if (quantity == 1) dispatch(removeItem(product));
     else dispatch(decreaseItemAmount(product));
   }
+  const assetUrl =
+    "https://data-placeholder.netlify.app/data/product-list-with-cart/";
+  const mobileAsset = `${assetUrl}${productData.image.mobile}`;
+  const tabletAsset = `${assetUrl}${productData.image.tablet}`;
+  const desktopAsset = `${assetUrl}${productData.image.desktop}`;
   return (
     <dl className={styled["product-card"]}>
       <div className={styled.menuImage}>
         <picture className={styled.picture}>
-          <source srcSet={productData.image.mobile} media="(max-width:600px)" />
-          <source srcSet={productData.image.tablet} media="(max-width:991px)" />
-          <img src={productData.image.desktop} className={styled.image} />
+          <source srcSet={mobileAsset} media="(max-width:600px)" />
+          <source srcSet={tabletAsset} media="(max-width:991px)" />
+          <img src={desktopAsset} className={styled.image} />
         </picture>
         {quantity === 0 || quantity == null ? (
           <button className={styled.button} onClick={addProduct}>
